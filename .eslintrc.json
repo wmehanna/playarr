@@ -1,0 +1,40 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "apps/*/tsconfig.json",
+          "libs/*/tsconfig.json"
+        ]
+      },
+      "plugins": [
+        "@nx/nx"
+      ],
+      "extends": [
+        "plugin:@nx/nx/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+      ],
+      "rules": {
+        // custom rules...
+      }
+    },
+    {
+      "files": [
+        "*.js"
+      ],
+      "extends": [
+        "prettier"
+      ]
+    }
+  ]
+}

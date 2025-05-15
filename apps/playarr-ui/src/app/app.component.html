@@ -1,0 +1,33 @@
+<mat-progress-spinner
+        *ngIf="loading$ | async"
+        class="app__global-spinner"
+        mode="indeterminate"
+></mat-progress-spinner>
+
+<mat-sidenav-container class="app__container">
+    <mat-sidenav #sidenav mode="side" opened>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/search">Search</a>
+            <a mat-list-item routerLink="/activity">Activity</a>
+            <a mat-list-item routerLink="/indexers">Indexers</a>
+            <a mat-list-item routerLink="/wanted">Wanted</a>
+            <a mat-list-item routerLink="/clients">Clients</a>
+            <a mat-list-item routerLink="/library">Library</a>
+            <a mat-list-item routerLink="/settings">Settings</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>PlayARR Dashboard</span>
+            <span class="app__spacer"></span>
+            <button mat-icon-button (click)="theme.toggleDark()">
+                <mat-icon>brightness_6</mat-icon>
+            </button>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

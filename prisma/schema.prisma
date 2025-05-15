@@ -1,0 +1,101 @@
+// File content placeholder
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model GeneralSettings {
+  id                       Int     @id @default(autoincrement())
+  downloadPath             String  @default("/downloads")
+  retentionDays            Int     @default(30)
+  imagePath                String  @default("/images")
+  maxConcurrentExtractions Int     @default(2)
+  maxExtractionRetries     Int     @default(3)
+  archivePath              String  @default("/archive")
+  useRsync                 Boolean @default(false)
+  deleteInstallerFiles     Boolean @default(false)
+}
+
+model ExtractorPreference {
+  id            Int     @id @default(autoincrement())
+  extractorName String  @unique
+  enabled       Boolean @default(true)
+  priority      Int     @default(0)
+}
+
+model Feed {
+  id       Int    @id @default(autoincrement())
+  name     String
+  url      String
+  priority Int
+}
+
+model ClientConfig {
+  id       Int     @id @default(autoincrement())
+  client   String  @unique
+  host     String
+  port     Int
+  username String?
+  password String?
+}
+
+model NamingConvention {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  pattern   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Game {
+  id             Int      @id @default(autoincrement())
+  hash           String   @unique
+  title          String
+  coverUrl       String?
+  localCoverPath String?
+  summary        String?
+  genres         String[]
+  createdAt      DateTime @default(now())
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model LogEntry {
+  id        Int      @id @default(autoincrement())
+  hash      String
+  type      String // e.g. "download" or "extract"
+  message   String
+  timestamp DateTime @default(now())
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model EmailSettings {
+  id          Int      @id @default(autoincrement())
+  provider    String   @default("sendgrid") // or "smtp"
+  apiKey      String? // SendGrid API key
+  fromAddress String
+  smtpHost    String?
+  smtpPort    Int?
+  smtpUser    String?
+  smtpPass    String?
+  smtpSecure  Boolean?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

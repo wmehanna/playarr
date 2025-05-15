@@ -1,0 +1,14 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [],
+        "accessToken": "YzU3YmJhZDYtYjJiOS00MmJkLWFmZGYtZTYzNzI1MGFiZDNifHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "defaultBase": "master",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "nxCloudId": "6825715edb2c6321b9902941"
+}
