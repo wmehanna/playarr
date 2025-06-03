@@ -21,19 +21,20 @@ export class SearchService {
                 const resp = await firstValueFrom(this.http.get<string>(feed.url, { responseType: 'text' }));
                 const parsed = await this.parser.parseString(resp.data);
                 for (const item of parsed.items) {
-                    if (!item.title.toLowerCase().includes(term.toLowerCase())) continue;
+                    const title = item.title || '';
+                    if (!title.toLowerCase().includes(term.toLowerCase())) continue;
                     const mag = (item.link || '').match(/(magnet:\?xt=[^&]+)/)?.[1] || '';
                     results.push({
-                        title: item.title,
+                        title,
                         magnet: mag,
-                        size: item.enclosure?.length || '',
+                        size: String(item.enclosure?.length || ''),
                         seeds: 0,
                         peers: 0,
-                        coverUrl: item.enclosure?.url,
+                        coverUrl: item.enclosure?.url || '',
                     });
                 }
-            } catch (err) {
-                this.logger.error(`Feed error: ${feed.url}`, err.stack);
+            } catch (err: any) {
+                this.logger.error(`Feed error: ${feed.url}`, err?.stack);
             }
         }
         return results;

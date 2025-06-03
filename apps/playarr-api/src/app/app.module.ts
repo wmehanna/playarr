@@ -18,6 +18,7 @@ import { EmailSettingsDao } from './settings/email-settings.dao';
         MailerModule.forRootAsync({
             useFactory: async (dao: EmailSettingsDao) => {
                 const cfg = await dao.get();
+                if (!cfg) throw new Error('Email settings not found');
                 const transport =
                     cfg.provider === 'smtp'
                         ? {
