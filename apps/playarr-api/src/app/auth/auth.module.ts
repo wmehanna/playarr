@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
@@ -15,8 +16,8 @@ import { PasswordResetDao } from './password-reset.dao';
             signOptions: { expiresIn: '24h' },
         }),
     ],
-    providers: [AuthService, UsersDao, JwtStrategy, PasswordResetDao],
+    providers: [AuthService, UsersDao, JwtStrategy, PasswordResetDao, PrismaService],
     controllers: [AuthController],
-    exports: [AuthService],
+    exports: [AuthService, PrismaService],
 })
 export class AuthModule {}

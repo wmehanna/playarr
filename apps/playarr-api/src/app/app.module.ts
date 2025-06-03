@@ -6,7 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { SearchModule } from './search/search.module';
 import { SettingsModule } from './settings/settings.module';
 import { PrismaService } from '../prisma/prisma.service';
-import { MailerModule } from '@nestjs-modules/mailer';
 import { EmailSettingsDao } from './settings/email-settings.dao';
 
 @Module({
