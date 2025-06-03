@@ -58,7 +58,7 @@ model Game {
   coverUrl       String?
   localCoverPath String?
   summary        String?
-  genres         String[]
+  genres         String
   createdAt      DateTime @default(now())
 }
 
