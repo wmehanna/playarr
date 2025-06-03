@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { SearchService } from './search.service';
 import { GameResultDto } from '@playarr/shared-types';
 
@@ -11,7 +11,6 @@ export class SearchController {
     @Get()
     @ApiOperation({ summary: 'Search across all indexer feeds for game repacks' })
     @ApiQuery({ name: 'q', description: 'Search term', required: true })
-    @ApiResponse({ status: 200, type: [GameResultDto] })
     search(@Query('q') q: string): Promise<GameResultDto[]> {
         return this.svc.search(q);
     }

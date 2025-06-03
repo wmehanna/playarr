@@ -10,14 +10,14 @@ export class AuthController {
 
     @Post('register')
     @ApiOperation({ summary: 'Register a new user' })
-    @ApiResponse({ status: 201, type: AuthResponseDto })
+    @ApiResponse({ status: 201 })
     register(@Body() dto: RegisterDto) {
         return this.svc.register(dto);
     }
 
     @Post('login')
     @ApiOperation({ summary: 'Login and receive JWT' })
-    @ApiResponse({ status: 200, type: AuthResponseDto })
+    @ApiResponse({ status: 200 })
     login(@Body() dto: LoginDto) {
         return this.svc.login(dto);
     }
