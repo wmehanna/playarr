@@ -13,6 +13,7 @@ export class PrismaService
       },
     });
   }
+
   async onModuleInit() {
     await this.$connect();
   }
