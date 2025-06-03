@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { Sentry } from '@sentry/node';
-import { Integrations } from '@sentry/tracing';
+import * as Sentry from '@sentry/node';
+import { Integrations as TracingIntegrations } from '@sentry/tracing';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -9,7 +9,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 async function bootstrap() {
     Sentry.init({
         dsn: process.env.SENTRY_DSN,
-        integrations: [new Integrations.Http({ tracing: true })],
+        integrations: [new Sentry.Integrations.Http({ tracing: true }), new TracingIntegrations.Prisma()],
         tracesSampleRate: 1.0,
     });
 
